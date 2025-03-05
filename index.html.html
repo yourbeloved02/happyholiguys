@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Holi in advance to SUVO, ARUP, DIP, RITAM....!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            transition: background 1.5s ease;
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+            z-index: 2;
+            margin-top: 5vh;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .name {
+            font-size: 6rem;
+            font-weight: bold;
+            margin: 2rem 0;
+            transform: rotate(-5deg);
+            display: inline-block;
+            transition: all 0.5s ease;
+        }
+
+        .message {
+            font-size: 2.2rem;
+            max-width: 600px;
+            line-height: 1.5;
+            margin: 2rem auto;
+            color: #444;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            animation: float 8s infinite linear;
+            opacity: 0.7;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-20vh) rotate(360deg); }
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            background: #ffffff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <h1 id="holiTitle">Happy Holi in advance to</h1>
+        <div class="name" id="name">SUVO, ARUP, DIP, RITAM</div>
+        <p class="message" id="message">May your life become a beautiful canvas of colors!</p>
+        <button id="colorBtn">🎨 Paint the Sky!</button>
+    </div>
+
+    <script>
+        // Random background generator
+        function setRandomBackground() {
+            const hue = Math.floor(Math.random() * 360);
+            document.body.style.background = `hsl(${hue}, 70%, 85%)`;
+        }
+
+        // Color particle generator
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            const hue = Math.random() * 360;
+            particle.style.background = `hsl(${hue}, 100%, 50%)`;
+            particle.style.animationDuration = (3 + Math.random() * 5) + 's';
+            document.getElementById('particles').appendChild(particle);
+        }
+
+        // Text color randomizer
+        function randomizeColors() {
+            const hue = Math.random() * 360;
+            const elements = [holiTitle, name, message, colorBtn];
+            
+            elements.forEach(el => {
+                const textHue = (hue + 180) % 360; // Contrasting color
+                if(el === colorBtn) {
+                    el.style.background = `hsl(${textHue}, 100%, 50%)`;
+                    el.style.color = '#fff';
+                } else {
+                    el.style.color = `hsl(${textHue}, 100%, 40%)`;
+                }
+            });
+        }
+
+        // Initial setup
+        setRandomBackground();
+        for(let i = 0; i < 30; i++) createParticle();
+
+        // Event listeners
+        colorBtn.addEventListener('click', () => {
+            setRandomBackground();
+            randomizeColors();
+            for(let i = 0; i < 15; i++) createParticle();
+        });
+
+        // Auto color change every 3 seconds
+        setInterval(() => {
+            setRandomBackground();
+            randomizeColors();
+        }, 3000);
+    </script>
+</body>
+</html>
